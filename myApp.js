@@ -10,7 +10,7 @@ app.get('/', (req,res) => {
 
 // serve a file
 app.get('/', (req, res) => {
-    let absolutePath = __dirname + 'views/index.html';
+    let absolutePath = __dirname + '/views/index.html';
     res.sendFile(absolutePath);
 })
 
