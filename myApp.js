@@ -14,6 +14,12 @@ app.get('/', (req, res) => {
     res.sendFile(absolutePath);
 })
 
+// Use a static file
+app.use((req,res) => {
+    let absolutePath = --__dirname + '/public';
+    express.static(absolutePath);
+})
+
 
 
 
