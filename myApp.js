@@ -9,7 +9,7 @@ app.get('/', (req,res) => {
 */
 
 // Use a static file
-app.use(express.static(__dirname + '/public'));
+app.use('/public',express.static(__dirname + '/public'));
 
 // serve a file
 app.get('/', (req, res) => {
