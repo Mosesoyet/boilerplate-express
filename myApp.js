@@ -1,5 +1,6 @@
 let express = require("express");
 let app = express();
+const path = require('path')
 
 // server a string
 /* 
@@ -15,10 +16,8 @@ app.get('/', (req, res) => {
 })
 
 // Use a static file
-app.use((req,res) => {
-    let absolutePath = --__dirname + '/public';
-    express.static(absolutePath);
-})
+app.use(express.static(path.join(__dirname, 'public')))
+
 
 
 
