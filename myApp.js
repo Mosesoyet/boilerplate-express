@@ -1,6 +1,6 @@
 let express = require("express");
 let app = express();
-require("dotenv").config()
+require('dotenv').config()
 
 // server a string
 /* 
@@ -20,11 +20,15 @@ app.get('/', (req, res) => {
 
 // serve json
 app.get('/json', (req, res) => {
-    const envMessage = process.env['MESSAGE_STYLE']
-    if (envMessage === "uppercase") {
-        res.json({"message": "Hello json".toUpperCase()})
+    const mySecrete = process.env['MESSAGE_STYLE']
+    if (mySecrete === "uppercase") {
+        res.json(
+            {"message": "Hello json".toUpperCase()}
+            );
     } else {
-        res.json({"message": "Hello json"})
+        res.json(
+            {"message": "Hello json"}
+            );
     }
 });
 
