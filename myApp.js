@@ -34,7 +34,7 @@ app.get('/json', (req, res) => {
 
 app.get('/middelware', (req, res, next) => {
     console.log(`${req.method} ${req.route} - ${req.ip}`);
-    next()
+    return next()
 });
 
 
