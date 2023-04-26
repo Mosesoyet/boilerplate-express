@@ -14,9 +14,9 @@ app.use('/public',express.static(__dirname + '/public'));
 
 // serve a file
 app.get('/', (req, res, next) => {
-    userPassedConsoleChallenge.log(`${req.method} ${req.path} - ${req.ip}`)
     let absolutePath = __dirname + '/views/index.html';
     res.sendFile(absolutePath);
+    console.log(`${req.method} ${req.path} - ${req.ip}`)
     next()
 })
 
@@ -34,6 +34,14 @@ app.get('/json', (req, res, next) => {
             );
     }
     next()
+});
+
+app.get('/now', (req, res, next) => {
+    console.log(`${req.method} ${req.path} - ${req.ip}`)
+    req.time = new Date().toString()
+    next()
+}, (req, res) => {
+    res.json({time: req.time})
 });
 
 
