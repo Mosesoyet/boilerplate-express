@@ -13,13 +13,16 @@ app.get('/', (req,res) => {
 app.use('/public',express.static(__dirname + '/public'));
 
 // serve a file
-app.get('/', (req, res) => {
+app.get('/', (req, res, next) => {
+    userPassedConsoleChallenge.log(`${req.method} ${req.path} - ${req.ip}`)
     let absolutePath = __dirname + '/views/index.html';
     res.sendFile(absolutePath);
+    next()
 })
 
 // serve json
-app.get('/json', (req, res) => {
+app.get('/json', (req, res, next) => {
+    console.log(`${req.method} ${req.path} - ${req.ip}`)
     const mySecrete = process.env['MESSAGE_STYLE']
     if (mySecrete === "uppercase") {
         res.json(
@@ -30,11 +33,7 @@ app.get('/json', (req, res) => {
             {"message": "Hello json"}
             );
     }
-});
-
-app.get('/middelware', (req, res, next) => {
-    console.log(`${req.method} ${req.route} - ${req.ip}`);
-    return next()
+    next()
 });
 
 
