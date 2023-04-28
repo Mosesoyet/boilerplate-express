@@ -53,6 +53,19 @@ app.get('/:word/echo', (req, res, next) => {
     });
 })
 
+app.route('/name').get((req, res, next) => {
+    req.firstname = req.query.firstname;
+    req.lastname = req.query.lastname;
+    next();
+}, (req, res) => {
+    res.json({
+        "name": `${req.query.firstname} ${req.query.lastname}`
+    });
+}).post((req,res) => {
+    req.firstname = req.query.firstname;
+    req.lastname = req.query.lastname;
+})
+
 
 
 
