@@ -1,3 +1,4 @@
+const { urlencoded } = require("body-parser");
 let express = require("express");
 let app = express();
 require('dotenv').config()
@@ -10,7 +11,9 @@ app.get('/', (req,res) => {
 */
 
 // Use a static file
-app.use('/public',express.static(__dirname + '/public'));
+app.use('/public', express.static(__dirname + '/public'));
+app.use(express.json());
+app.use(urlencoded({ extended: true }));
 
 // serve a file
 app.get('/', (req, res, next) => {
@@ -53,15 +56,22 @@ app.get('/:word/echo', (req, res, next) => {
     });
 })
 
-app.get('/name', (req, res, next) => {
+app.route('/name').post((req, res, next) => {
     req.firstname = req.query.firstname;
     req.lastname = req.query.lastname;
-    next();
+    next()
 }, (req, res) => {
-    res.json({
-        "name": `${req.query.firstname} ${req.query.lastname}`
-    });
-});
+    res.send({
+        "firstname": req.query.firstname,
+        "lastname": req.query.lastname
+    })
+}).get((req, res, next) => {
+    req.firstname = req.query.firstname;
+    req.lastname = req.query.lastname;
+    next()
+}, (req,res) => {
+    res.json({ "name": `${req.query.firstname} ${req.query.lastname}` })
+})
 
 
 
