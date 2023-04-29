@@ -1,4 +1,4 @@
-const { urlencoded } = require("body-parser");
+const bodyParser = require("body-parser");
 let express = require("express");
 let app = express();
 require('dotenv').config()
@@ -9,11 +9,12 @@ app.get('/', (req,res) => {
     res.send("Hello Express")
 })
 */
+bodyParser.urlencoded({ extended: false })
 
 // Use a static file
 app.use('/public', express.static(__dirname + '/public'));
 app.use(express.json());
-app.use(urlencoded({ extended: true }));
+app.use(bodyParser);
 
 // serve a file
 app.get('/', (req, res, next) => {
