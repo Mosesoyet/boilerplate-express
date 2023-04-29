@@ -1,4 +1,4 @@
-const bodyParser = require("body-parser");
+let bodyParser = require("body-parser");
 let express = require("express");
 let app = express();
 require('dotenv').config()
@@ -9,18 +9,18 @@ app.get('/', (req,res) => {
     res.send("Hello Express")
 })
 */
-bodyParser.urlencoded({ extended: false })
 
 // Use a static file
 app.use('/public', express.static(__dirname + '/public'));
-app.use(express.json());
-app.use(bodyParser);
+app.use(bodyParser.urlencoded({extended: false}));
 
 // serve a file
 app.get('/', (req, res, next) => {
     let absolutePath = __dirname + '/views/index.html';
     res.sendFile(absolutePath);
+    /*
     console.log(`${req.method} ${req.path} - ${req.ip}`)
+    */
     next()
 })
 
