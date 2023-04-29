@@ -57,20 +57,20 @@ app.get('/:word/echo', (req, res, next) => {
 })
 
 app.route('/name').post((req, res, next) => {
-    req.firstname = req.query.firstname;
-    req.lastname = req.query.lastname;
+    req.first = req.query.first;
+    req.last = req.query.last;
     next()
 }, (req, res) => {
     res.send({
-        "firstname": req.query.firstname,
-        "lastname": req.query.lastname
+        "firstname": req.query.first,
+        "lastname": req.query.last
     })
 }).get((req, res, next) => {
-    req.firstname = req.query.firstname;
-    req.lastname = req.query.lastname;
+    req.first = req.query.first;
+    req.last = req.query.last;
     next()
 }, (req,res) => {
-    res.json({ "name": `${req.query.firstname} ${req.query.lastname}` })
+    res.json({ "name": `${req.query.first} ${req.query.last}` })
 })
 
 
