@@ -18,10 +18,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.get('/', (req, res, next) => {
     let absolutePath = __dirname + '/views/index.html';
     res.sendFile(absolutePath);
-    /*
-    console.log(`${req.method} ${req.path} - ${req.ip}`)
-    */
-    next()
 })
 
 // serve json
@@ -58,13 +54,12 @@ app.get('/:word/echo', (req, res, next) => {
 })
 
 app.route('/name').post((req, res, next) => {
-    req.first = req.query.first;
-    req.last = req.query.last;
+    req.first = req.body.first;
+    req.last = req.body.last;
     next()
 }, (req, res) => {
-    res.send({
-        "firstname": req.query.first,
-        "lastname": req.query.last
+    res.json({
+        "name": `${req.body.first} ${req.body.last}`
     })
 }).get((req, res, next) => {
     req.first = req.query.first;
